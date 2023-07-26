@@ -120,6 +120,7 @@ export const authOptions: NextAuthOptions = {
           if (isPasswordValid) {
             console.log("here2");
             // Any object returned will be saved in `user` property of the JWT
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
             return user;
           }

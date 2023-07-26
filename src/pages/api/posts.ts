@@ -12,11 +12,13 @@ export default async function handle(
   if (req.method === "POST") {
     const { description, imageUrl } = req.body;
 
-    const posts = await prisma.post.findMany();
+    const posts = await prisma.memory.findMany();
     console.log("posts", posts);
 
     try {
-      const post = await prisma.post.create({
+      const post = await prisma.memory.create({
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         data: {
           description: description,
           memoryImageUrl: imageUrl,
