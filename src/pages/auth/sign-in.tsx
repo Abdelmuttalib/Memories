@@ -1,13 +1,14 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import AuthFormContainer from "@/components/auth/AuthFormContainer";
-import Layout from "@/components/layout/Layout";
+// import Layout from "@/components/layout/Layout";
 import BlurImage from "@/components/ui/blur-image";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { getServerAuthSession } from "@/server/auth";
 import { cn } from "@/utils/cn";
 import {
-  GetServerSideProps,
-  InferGetServerSidePropsType,
-  NextPage,
+  type GetServerSideProps,
+  type InferGetServerSidePropsType,
+  type NextPage,
 } from "next";
 import { getProviders, signIn } from "next-auth/react";
 

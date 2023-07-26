@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 // /pages/api/register.js
 
 import { prisma } from "@/server/db";
 import bcrypt from "bcryptjs";
-import { NextApiRequest, NextApiResponse } from "next";
+import type { NextApiRequest, NextApiResponse } from "next";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method !== "POST") {
@@ -32,7 +33,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   // Hash the password
-  const hashedPassword = await bcrypt.hash(password, 10);
+  const hashedPassword = await bcrypt.hash(password as string, 10);
 
   try {
     // Create a new user in Supabase

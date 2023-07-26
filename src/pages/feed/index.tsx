@@ -9,7 +9,7 @@ import { api } from "@/utils/api";
 import type { Memory as TMemory } from "@prisma/client";
 import type { GetServerSideProps } from "next";
 import type { Session } from "next-auth";
-import Image from "next/image";
+// import Image from "next/image";
 import React from "react";
 
 // <div

@@ -1,10 +1,10 @@
-import AuthFormContainer from "@/components/auth/AuthFormContainer";
-import Layout from "@/components/layout/Layout";
-import { Button, buttonVariants } from "@/components/ui/button";
-import { cn } from "@/utils/cn";
+// import AuthFormContainer from "@/components/auth/AuthFormContainer";
+// import Layout from "@/components/layout/Layout";
+// import { Button, buttonVariants } from "@/components/ui/button";
+// import { cn } from "@/utils/cn";
 import Head from "next/head";
 import Image from "next/image";
-import Link from "next/link";
+// import Link from "next/link";
 
 export default function Home() {
   return (

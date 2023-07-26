@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 // import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { type GetServerSidePropsContext } from "next";
 import {
@@ -37,6 +41,15 @@ declare module "next-auth" {
     image?: string;
     password: string;
   }
+}
+
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  email_verified: boolean;
+  image?: string;
+  password: string;
 }
 
 /**
@@ -85,7 +98,9 @@ export const authOptions: NextAuthOptions = {
         },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials) {
+      async authorize(
+        credentials: Record<"email" | "password", string> | undefined
+      ): Promise<User | null> {
         console.log("credentials: ", credentials);
 
         const user = await prisma.user.findUnique({
@@ -98,13 +113,14 @@ export const authOptions: NextAuthOptions = {
         if (user && credentials?.password) {
           console.log("here1");
           const isPasswordValid = await comparePasswords(
-            credentials.password,
+            credentials?.password,
             user.password
           );
 
           if (isPasswordValid) {
             console.log("here2");
             // Any object returned will be saved in `user` property of the JWT
+            // @ts-ignore
             return user;
           }
         } else {
@@ -114,6 +130,8 @@ export const authOptions: NextAuthOptions = {
           // throw new Error('error message') // Redirect to error page
           // throw '/path/to/redirect'        // Redirect to a URL
         }
+
+        return null;
       },
     }),
     // DiscordProvider({

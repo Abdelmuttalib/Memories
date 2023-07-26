@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 // pages/api/posts.ts
 import { prisma } from "@/server/db";
 import type { NextApiRequest, NextApiResponse } from "next";

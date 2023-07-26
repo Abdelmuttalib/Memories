@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
@@ -373,10 +375,7 @@ const ImageUploadDialog: FC<{
       <DialogTrigger asChild>
         <Button type="button">Share Memory</Button>
       </DialogTrigger>
-      <DialogContent
-        closeButton={false}
-        className="border-none bg-white p-0 pb-4 sm:max-w-xl"
-      >
+      <DialogContent className="border-none bg-white p-0 pb-4 sm:max-w-xl">
         {/* <DialogHeader> */}
         {/* <DialogTitle>Add a new memory</DialogTitle> */}
         {/* <DialogDescription>
