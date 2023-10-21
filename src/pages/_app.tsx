@@ -5,6 +5,7 @@ import { api } from "@/utils/api";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import "@/styles/globals.css";
 import { Toaster } from "sonner";
+import { Analytics } from "@vercel/analytics/react";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -13,6 +14,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
   return (
     <NextThemesProvider attribute="class" defaultTheme="system" enableSystem>
       <SessionProvider session={session}>
+        <Analytics />
         <Component {...pageProps} />
         <Toaster position="top-center" expand visibleToasts={4} richColors />
       </SessionProvider>
