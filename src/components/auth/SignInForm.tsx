@@ -4,7 +4,6 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useSession, signIn } from "next-auth/react";
 import { type Dispatch, type FC, type SetStateAction, useState } from "react";
-import { type TAuthType } from "./AuthFormContainer";
 import { cn } from "@/utils/cn";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";

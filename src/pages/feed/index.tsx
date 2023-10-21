@@ -9,7 +9,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { getServerAuthSession } from "@/server/auth";
 import { api } from "@/utils/api";
 import { cn } from "@/utils/cn";
-import type { Memory as TMemory } from "@prisma/client";
+import type { Memory as TMemory, User } from "@prisma/client";
 // import { Trash2 } from "lucide-react";
 import type { GetServerSideProps } from "next";
 import type { Session } from "next-auth";
@@ -51,13 +51,7 @@ export function Memory({
   userId,
   user,
 }: TMemory & {
-  user: {
-    id: string;
-    name: string;
-    username: string;
-    email: string;
-    image: string;
-  };
+  user: any;
 }) {
   const apiContext = api.useContext();
 

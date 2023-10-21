@@ -15,7 +15,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 
 import { prisma } from "@/server/db";
 import { comparePasswords } from "@/utils/bcrypt";
-import { SupabaseAdapter } from "@auth/supabase-adapter";
+// import { SupabaseAdapter } from "@auth/supabase-adapter";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -110,7 +110,6 @@ export const authOptions: NextAuthOptions = {
       async authorize(
         credentials: Record<"email" | "password", string> | undefined
       ): Promise<User | null> {
-
         const user = await prisma.user.findUnique({
           where: {
             email: credentials?.email,
