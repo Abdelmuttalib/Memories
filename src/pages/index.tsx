@@ -2,11 +2,14 @@
 // import Layout from "@/components/layout/Layout";
 // import { Button, buttonVariants } from "@/components/ui/button";
 // import { cn } from "@/utils/cn";
+import { Button } from "@/components/ui/button";
 import Head from "next/head";
 import Image from "next/image";
+import { useRouter } from "next/router";
 // import Link from "next/link";
 
 export default function Home() {
+  const { push } = useRouter();
   return (
     <>
       <Head>
@@ -41,9 +44,17 @@ export default function Home() {
             </p>
           </div>
 
-          <p className="mx-auto mt-4 w-fit rounded-lg bg-gray-900/30 px-4 py-2.5">
+          {/* <p className="mx-auto mt-4 w-fit rounded-lg bg-gray-900/30 px-4 py-2.5">
             Coming soon...
-          </p>
+          </p> */}
+          <Button
+            variant="secondary"
+            className="mx-auto mt-4 w-fit font-medium"
+            // eslint-disable-next-line @typescript-eslint/no-misused-promises
+            onClick={() => push("/feed")}
+          >
+            Get Started
+          </Button>
         </div>
       </main>
       {/* <div className="container relative hidden h-[100svh] flex-col items-center justify-center bg-ash-gray/10 md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">

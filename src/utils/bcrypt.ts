@@ -13,3 +13,15 @@ export const comparePasswords = async (
     return false;
   }
 };
+
+const SALT_ROUNDS = 10;
+export async function hashPassword(plaintextPassword: string) {
+  try {
+    const hashedPassword = await bcrypt.hash(plaintextPassword, SALT_ROUNDS);
+    return hashedPassword;
+  } catch (error) {
+    // Handle error
+    console.error("Error hashing password:", error);
+    return "";
+  }
+}

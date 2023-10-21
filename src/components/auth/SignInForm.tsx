@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useRouter } from "next/router";
 import { toast } from "sonner";
+import Link from "next/link";
 
 const signInValidationSchema = z.object({
   email: z
@@ -22,12 +23,9 @@ const signInValidationSchema = z.object({
 
 type TSignInFormFields = z.infer<typeof signInValidationSchema>;
 
-const SignInForm: FC<{
-  setAuthType: Dispatch<SetStateAction<TAuthType>>;
-}> = ({ setAuthType }) => {
+export default function SignInForm() {
   const { push } = useRouter();
   const { data: session, status } = useSession();
-  console.log(session, status);
 
   const [loading, setLoading] = useState(false);
 
@@ -51,9 +49,7 @@ const SignInForm: FC<{
       // callbackUrl: `${window.location.origin}/dashboard/projects`,
     })
       .then(async (response) => {
-        console.log(response);
         if (response?.ok) {
-          console.log("ok");
           toast.success("Signed in successfully");
           await push(response?.url as string);
         }
@@ -62,7 +58,6 @@ const SignInForm: FC<{
         }
       })
       .catch((error) => {
-        console.log(error);
         toast.error("Sign in failed");
       })
       .finally(() => setLoading(false));
@@ -72,7 +67,8 @@ const SignInForm: FC<{
     <div className="w-full">
       {/* Card Title */}
       <h2 className="text-2xl font-bold lg:text-3xl">
-        Sign in to your account
+        Sign in
+        {/* to your account */}
       </h2>
 
       <form
@@ -81,12 +77,12 @@ const SignInForm: FC<{
       >
         <div>
           {/* Email Input */}
-          <Label htmlFor="email">E-mail</Label>
+          <Label htmlFor="email">Email</Label>
           <Input
             id="email"
             type="email"
             {...register("email", { required: true })}
-            placeholder="e-mail address"
+            placeholder="email address"
             autoComplete="email"
             className={cn({ "border-red-500": errors.email })}
             disabled={loading}
@@ -115,7 +111,7 @@ const SignInForm: FC<{
           )}
         </div>
 
-        <div className="mt-4 space-y-2">
+        <div className="mt-2">
           {/* Auth Buttton */}
           <Button
             type="submit"
@@ -123,21 +119,18 @@ const SignInForm: FC<{
             disabled={Object.keys(errors).length > 0 || loading}
             isLoading={loading}
           >
-            Login
+            Sign In
           </Button>
-          <Button
+          {/* <Button
             type="button"
             className={cn("w-full")}
-            onClick={() => setAuthType("create-account")}
-            variant="outline"
             disabled={loading}
+            variant="flat"
           >
             Create an account
-          </Button>
+          </Button> */}
         </div>
       </form>
     </div>
   );
-};
-
-export default SignInForm;
+}

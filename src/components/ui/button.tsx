@@ -4,28 +4,42 @@ import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/utils/cn";
 import { Loader2 } from "lucide-react";
+import Link, { LinkProps } from "next/link";
+import { ClassValue } from "clsx";
+
+// className="rounded-md bg-black bg-opacity-20 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+
+{
+  /* <button
+type="button"
+className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+onClick={closeModal}
+>
+Got it, thanks!
+</button> */
+}
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background",
+  "inline-flex items-center justify-center rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-90 disabled:pointer-events-none ring-offset-background",
   {
+    // hover black // #2c343e
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90",
-        destructive:
-          "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+        default: "bg-black text-white hover:bg-ashgray-900/90",
+        outline:
+          "border-2 border-ashgray-800 text-ashgray-900 hover:bg-ashgray-200/50",
+        secondary: "bg-ashgray-100 text-ashgray-900 hover:bg-ashgray-200",
+        ghost: "hover:bg-ashgray-100 hover:text-ashgray-900",
+        link: "underline-offset-4 hover:underline text-primary",
+        destructive: "bg-destructive text-white hover:bg-destructive/90",
         "destructive-outline":
           "bg-transparent text-destructive hover:bg-destructive/10 border-2 border-destructive",
-        outline:
-          "border border-input hover:bg-accent hover:text-accent-foreground",
-        secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "underline-offset-4 hover:underline text-primary",
       },
       size: {
-        default: "h-10 py-2 px-4",
-        sm: "h-9 px-3 rounded-md",
-        lg: "h-11 px-8 rounded-md",
+        default: "h-11 py-2 px-6",
+        sm: "h-10 px-4 rounded-md",
+        lg: "h-12 px-9 rounded-md",
+        icon: "h-11 px-2 rounded-lg",
       },
     },
     defaultVariants: {
@@ -66,9 +80,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {!isLoading ? (
           children
         ) : (
-          <div className="inline-flex items-center">
+          <div className="inline-flex transform items-center transition-all duration-200 ease-in-out">
             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-            Loading
           </div>
         )}
       </Comp>
@@ -77,4 +90,49 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 );
 Button.displayName = "Button";
 
-export { Button, buttonVariants };
+export interface ButtonLinkProps
+  extends LinkProps,
+    VariantProps<typeof buttonVariants> {
+  asChild?: boolean;
+  isLoading?: boolean;
+  children?: React.ReactNode;
+  className?: ClassValue;
+}
+
+const ButtonLink = React.forwardRef<HTMLAnchorElement, ButtonLinkProps>(
+  (
+    {
+      className,
+      variant,
+      size,
+      asChild = false,
+      isLoading,
+      children,
+      ...props
+    },
+    ref
+  ) => {
+    const Comp = asChild ? Slot : Link;
+    return (
+      <Comp
+        className={cn(buttonVariants({ variant, size, className }))}
+        ref={ref}
+        {...props}
+      >
+        {children}
+      </Comp>
+    );
+  }
+);
+
+// {!isLoading ? (
+//   children
+// ) : (
+//   <div className="inline-flex items-center">
+//     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+//     Loading
+//   </div>
+// )}
+ButtonLink.displayName = "ButtonLink";
+
+export { Button, buttonVariants, ButtonLink };

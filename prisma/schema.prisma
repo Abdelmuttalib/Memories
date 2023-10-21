@@ -35,15 +35,17 @@ model Session {
 }
 
 model User {
-    id             String    @id @default(uuid())
+    id             String       @id @default(uuid())
     name           String?
-    email          String?   @unique
+    email          String       @unique
     email_verified DateTime?
+    username       String       @unique
     image          String?
     accounts       Account[]
     sessions       Session[]
     password       String
     memories       Memory[]
+    likedMemories  MemoryLike[]
 }
 
 model VerificationRequest {
@@ -60,10 +62,22 @@ model Memory {
     description    String
     memoryImageUrl String
 
-    createdAt DateTime @default(now())
-    likes     Int      @default(0)
+    createdAt DateTime     @default(now())
     location  String?
+    likes     MemoryLike[]
 
     userId String // Add this foreign key field
     user   User   @relation(fields: [userId], references: [id])
+
+    @@map(name: "memories")
+}
+
+model MemoryLike {
+    id       String @id @default(uuid())
+    memory   Memory @relation(fields: [memoryId], references: [id])
+    memoryId String
+    user     User   @relation(fields: [userId], references: [id])
+    userId   String
+
+    @@unique([memoryId, userId])
 }

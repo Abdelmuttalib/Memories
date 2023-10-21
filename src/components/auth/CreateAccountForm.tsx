@@ -9,32 +9,35 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/utils/cn";
+import { toast } from "sonner";
+import { api } from "@/utils/api";
+import { useRouter } from "next/router";
+import Link from "next/link";
+import { AtSign } from "lucide-react";
 
-function CreateAccountForm({
-  setAuthType,
-}: {
-  setAuthType: Dispatch<SetStateAction<TAuthType>>;
-}) {
-  const signUpValidationSchema = z
-    .object({
-      email: z
-        .string()
-        .min(1, { message: "kindly enter your email" })
-        .email({ message: "kindly enter a valid email" }),
-      password: z
-        .string()
-        .min(4, { message: "password must be at least 4 characters" }),
-      confirmPassword: z
-        .string()
-        .min(4, { message: "password must be at least 4 characters" }),
-    })
-    .refine((data) => data.password === data.confirmPassword, {
-      path: ["confirmPassword"],
-      message: "passwords do not match",
-    });
+const signUpValidationSchema = z
+  .object({
+    email: z
+      .string()
+      .min(1, { message: "kindly enter your email" })
+      .email({ message: "kindly enter a valid email" }),
+    name: z.string().min(1, { message: "kindly enter your name" }),
+    username: z.string().min(1, { message: "kindly enter your username" }),
+    password: z
+      .string()
+      .min(4, { message: "password must be at least 4 characters" }),
+    confirmPassword: z
+      .string()
+      .min(4, { message: "password must be at least 4 characters" }),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    path: ["confirmPassword"],
+    message: "passwords do not match",
+  });
 
-  type TSignUpFormFields = z.infer<typeof signUpValidationSchema>;
+type TSignUpFormFields = z.infer<typeof signUpValidationSchema>;
 
+export default function CreateAccountForm() {
   const {
     register,
     handleSubmit,
@@ -42,6 +45,8 @@ function CreateAccountForm({
   } = useForm<TSignUpFormFields>({
     resolver: zodResolver(signUpValidationSchema),
   });
+
+  const { push } = useRouter();
   // const createMemoryMutation = api.memories.createMemory.useMutation({
   //   onSuccess: () => {
   //     toast.success("User created successfully");
@@ -53,45 +58,27 @@ function CreateAccountForm({
   //   },
   // });
   // console.log(createUserMutation);
+
+  const registerUserMutation = api.user.registerUser.useMutation({
+    onSuccess: async () => {
+      toast.success("User created successfully");
+      await push("/sign-in");
+    },
+
+    onError: (err) => {
+      toast.error(err.message);
+    },
+  });
+
   async function onSubmit(data: TSignUpFormFields) {
-    console.log(data);
-    const { email, password } = data;
+    const { email, username, name, password } = data;
 
-    try {
-      const response = await fetch("/api/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Registration failed");
-      }
-
-      const responseData = await response.json();
-      // Handle the response data
-      console.log("Registration successful:", responseData);
-      // toast.success("User created successfully");
-      setAuthType("sign-in");
-    } catch (error) {
-      // Handle the error
-      console.error("Registration error:", error);
-    }
-
-    // const res = await prismaClient.user.create({
-    //   data: {
-    //     email: data.email,
-    //     password: data.password,
-    //   },
-    // });
-    // console.log(res);
-
-    // createUserMutation.mutate({
-    //   email: data.email,
-    //   password: data.password,
-    // });
+    await registerUserMutation.mutateAsync({
+      email,
+      username,
+      name,
+      password,
+    });
   }
 
   return (
@@ -105,17 +92,49 @@ function CreateAccountForm({
       >
         {/* Email Input */}
         <div>
-          <Label htmlFor="email">E-mail</Label>
+          <Label htmlFor="email">Email</Label>
           <Input
             id="email"
             type="email"
             {...register("email", { required: true })}
-            placeholder="e-mail address"
+            placeholder="email address"
             autoComplete="email"
-            className={cn({ "border-red-500": errors.email })}
           />
           {errors.email && (
             <p className="text-sm text-red-500">{errors.email?.message}</p>
+          )}
+        </div>
+
+        {/* Name */}
+        <div>
+          <Label htmlFor="name">Name</Label>
+          <Input
+            id="name"
+            type="text"
+            {...register("name", { required: true })}
+            placeholder="name"
+          />
+          {errors.name && (
+            <p className="text-sm text-red-500">{errors.name?.message}</p>
+          )}
+        </div>
+
+        {/* Username */}
+        {/* <AtSign className="absolute -bottom-0.5 left-2 w-5 -translate-y-1/2 transform text-ashgray-700" /> */}
+        <div className="relative">
+          <Label htmlFor="username">Username</Label>
+          <div className="relative flex">
+            <AtSign className="absolute bottom-2 left-2 w-5 text-ashgray-600" />
+            <Input
+              id="username"
+              type="text"
+              {...register("username", { required: true })}
+              placeholder="username"
+              className="pl-8"
+            />
+          </div>
+          {errors.username && (
+            <p className="text-sm text-red-500">{errors.username?.message}</p>
           )}
         </div>
 
@@ -127,7 +146,6 @@ function CreateAccountForm({
             type="password"
             {...register("password", { required: true })}
             placeholder="password"
-            className={cn({ "border-red-500": errors.password })}
           />
           {errors.password && (
             <p className="text-sm text-red-500">{errors.password?.message}</p>
@@ -142,7 +160,6 @@ function CreateAccountForm({
             type="password"
             {...register("confirmPassword", { required: true })}
             placeholder="confirm password"
-            className={cn({ "border-red-500": errors.confirmPassword })}
           />
           {errors.confirmPassword && (
             <p className="text-sm text-red-500">
@@ -155,24 +172,16 @@ function CreateAccountForm({
           {/* Auth Buttton */}
           <Button
             type="submit"
-            disabled={Object.keys(errors).length > 0}
+            disabled={
+              Object.keys(errors).length > 0 || registerUserMutation.isLoading
+            }
             className={cn("w-full")}
+            isLoading={registerUserMutation.isLoading}
           >
             Create Account
-          </Button>
-
-          <Button
-            type="button"
-            onClick={() => setAuthType("sign-in")}
-            className={cn("w-full")}
-            variant="outline"
-          >
-            Sign in
           </Button>
         </div>
       </form>
     </div>
   );
 }
-
-export default CreateAccountForm;

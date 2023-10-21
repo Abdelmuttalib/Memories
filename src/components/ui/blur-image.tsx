@@ -1,6 +1,6 @@
 import { cn } from "@/utils/cn";
 import Image, { type ImageProps } from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function BlurImage({
   src,
@@ -9,10 +9,6 @@ export default function BlurImage({
   ...props
 }: ImageProps) {
   const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    console.log("s: ", isLoading);
-  }, [isLoading]);
 
   return (
     <Image

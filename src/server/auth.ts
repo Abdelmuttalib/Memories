@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
@@ -14,6 +15,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 
 import { prisma } from "@/server/db";
 import { comparePasswords } from "@/utils/bcrypt";
+import { SupabaseAdapter } from "@auth/supabase-adapter";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -40,6 +42,7 @@ declare module "next-auth" {
     email_verified: boolean;
     image?: string;
     password: string;
+    username: string;
   }
 }
 
@@ -50,6 +53,7 @@ interface User {
   email_verified: boolean;
   image?: string;
   password: string;
+  username: string;
 }
 
 /**
@@ -63,6 +67,7 @@ export const authOptions: NextAuthOptions = {
       return {
         ...token,
         ...(user && user.id ? { id: user.id } : {}),
+        ...(user && user.username ? { username: user.username } : {}),
         ...(user && user.email_verified
           ? { email_verified: user.email_verified }
           : {}),
@@ -76,6 +81,7 @@ export const authOptions: NextAuthOptions = {
           // id: user.id,
           ...token,
           ...(token && token.id ? { id: token.id } : {}),
+          ...(token && token.username ? { username: token.username } : {}),
           ...(token && token.email_verified
             ? { email_verified: token.email_verified }
             : {}),
@@ -83,10 +89,13 @@ export const authOptions: NextAuthOptions = {
       };
     },
   },
-  // adapter: PrismaAdapter(prisma),
   pages: {
-    signIn: "/auth/sign-in",
+    signIn: "/sign-in",
   },
+  // adapter: SupabaseAdapter({
+  //   url: process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  //   secret: process.env.SUPABASE_SERVICE_ROLE_KEY!,
+  // }),
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -101,7 +110,6 @@ export const authOptions: NextAuthOptions = {
       async authorize(
         credentials: Record<"email" | "password", string> | undefined
       ): Promise<User | null> {
-        console.log("credentials: ", credentials);
 
         const user = await prisma.user.findUnique({
           where: {
@@ -109,16 +117,13 @@ export const authOptions: NextAuthOptions = {
           },
         });
 
-        console.log("user: ", user);
         if (user && credentials?.password) {
-          console.log("here1");
           const isPasswordValid = await comparePasswords(
             credentials?.password,
             user.password
           );
 
           if (isPasswordValid) {
-            console.log("here2");
             // Any object returned will be saved in `user` property of the JWT
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore

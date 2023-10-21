@@ -13,7 +13,6 @@ export default async function handle(
     const { description, imageUrl } = req.body;
 
     const posts = await prisma.memory.findMany();
-    console.log("posts", posts);
 
     try {
       const post = await prisma.memory.create({

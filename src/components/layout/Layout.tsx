@@ -1,89 +1,48 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import Link from "next/link";
-import type { FC, ReactNode } from "react";
-import { signOut } from "next-auth/react";
 import { useRouter } from "next/router";
 import { cn } from "@/utils/cn";
-import { Button } from "../ui/button";
-import { ThemeToggle } from "../theme-toggle";
+import { ButtonLink } from "../ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
+import { HomeIcon, PlusIcon, UserIcon } from "@heroicons/react/20/solid";
+import { LogIn, LogOut, Plus, PlusCircle, User } from "lucide-react";
+import { Avatar, AvatarImage } from "../ui/avatar";
+import ImageUpload from "../feed/ImageUpload";
+import MainNav from "./MainNav";
+import { type ReactNode } from "react";
 
+function Header() {
+  return (
+    <header className="sticky top-3 z-40 mx-auto h-14 w-fit rounded-md bg-black">
+      <div className="container flex h-14 w-fit items-center justify-center rounded-md">
+        <Link href="/" className="text-ashgray-100 shadow-xl">
+          <span className="text-2xl font-bold tracking-tighter sm:text-3xl">
+            MEMORIES
+          </span>
+        </Link>
+      </div>
+    </header>
+  );
+}
 interface LayoutPros {
   children: ReactNode;
 }
 
-const homeNavLinks = [
-  {
-    label: "Feed",
-    href: "/feed",
-  },
-  {
-    label: "Profile",
-    href: "/profile",
-  },
-];
-
 // #0b0b0b
 // #f0f0f0
-const Layout: FC<LayoutPros> = ({ children }) => {
-  const { pathname } = useRouter();
+export default function Layout({ children }: LayoutPros) {
   return (
-    <div className="flex w-screen flex-col">
+    <div className="relative flex min-h-screen flex-col bg-[#0b0b0b]">
       {/* header */}
-      <header className="h-24 w-full">
-        <div className="container flex h-24 w-full items-center justify-between">
-          <Link href="/">
-            <h3 className="text-2xl font-bold tracking-tighter">MEMORIES</h3>
-          </Link>
-          <nav className="">
-            <Tabs defaultValue={pathname} className="w-[150px] sm:w-[200px]">
-              <TabsList className="w-full">
-                {homeNavLinks.map(({ label, href }) => (
-                  <TabsTrigger
-                    key={`${label}${href}`}
-                    value={href}
-                    asChild
-                    className="w-full"
-                  >
-                    <Link href={href}>{label}</Link>
-                  </TabsTrigger>
-                ))}
-              </TabsList>
-            </Tabs>
-            {/* <ul className="flex">
-              {homeNavLinks.map(({ label, href }) => (
-                <li key={`${label}${href}`}>
-                  <Link
-                    href={href}
-                    className={cn(
-                      "rounded px-3 py-1.5 font-medium hover:bg-primary/5",
-                      {
-                        "underline decoration-2 underline-offset-4":
-                          pathname === href,
-                      }
-                    )}
-                  >
-                    {label}
-                  </Link>
-                </li>
-              ))}
-            </ul> */}
-          </nav>
-          <div className="hidden items-center gap-1.5 sm:flex">
-            <ThemeToggle />
-            <Button variant="outline" size="sm" onClick={() => signOut()}>
-              Sign out
-            </Button>
-          </div>
-        </div>
-      </header>
+      <Header />
       {/* main */}
-      <main className="h-[100svh] w-full flex-1">{children}</main>
+      <main className="relative h-[100svh] w-full flex-1">{children}</main>
       {/* footer */}
       <footer></footer>
+
+      {/*  */}
+      <MainNav />
     </div>
   );
-};
-
-export default Layout;
+}

@@ -11,7 +11,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   // Destructure the email and password from the request body
-  console.log(req.body);
   const { email, password } = req.body;
 
   // Check if the email and password are provided

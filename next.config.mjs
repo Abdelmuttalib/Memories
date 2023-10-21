@@ -9,7 +9,11 @@ const config = {
   reactStrictMode: true,
 
   images: {
-    domains: ["lpdpbcxrpfxrvjsqfdqg.supabase.co", "images.unsplash.com"],
+    domains: [
+      "nclotvomfmfnmhdvrplf.supabase.co",
+      "images.unsplash.com",
+      "images.pexels.com",
+    ],
   },
 
   /**
