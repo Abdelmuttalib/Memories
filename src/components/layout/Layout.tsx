@@ -14,7 +14,7 @@ import { type ReactNode } from "react";
 
 function Header() {
   return (
-    <header className="sticky top-3 z-40 mx-auto h-14 w-fit rounded-md bg-black">
+    <header className="sticky top-3 z-50 mx-auto h-14 w-fit rounded-md bg-black">
       <div className="container flex h-14 w-fit items-center justify-center rounded-md">
         <Link href="/" className="text-ashgray-100 shadow-xl">
           <span className="text-2xl font-bold tracking-tighter sm:text-3xl">
@@ -33,7 +33,7 @@ interface LayoutPros {
 // #f0f0f0
 export default function Layout({ children }: LayoutPros) {
   return (
-    <div className="relative flex min-h-screen flex-col bg-[#0b0b0b]">
+    <div className="relative flex min-h-screen flex-col bg-ashgray-100 dark:bg-[#0b0b0b]">
       {/* header */}
       <Header />
       {/* main */}

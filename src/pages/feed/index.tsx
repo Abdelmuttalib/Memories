@@ -3,6 +3,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 // import ImageUpload from "@/components/feed/ImageUpload";
 import Layout from "@/components/layout/Layout";
+import Memory, { MemoryLoaderUI } from "@/components/memory";
 import BlurImage from "@/components/ui/blur-image";
 // import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -35,84 +36,6 @@ import React from "react";
 //     &quot;{memory.description}&quot;
 //   </p>
 // </div>
-
-export function MemoryLoaderUI() {
-  return (
-    <div className="group relative aspect-square max-h-[26rem] w-full cursor-pointer overflow-hidden">
-      <Skeleton className="aspect-square w-full rounded-none object-left group-hover:scale-110" />
-    </div>
-  );
-}
-
-export function Memory({
-  id,
-  description,
-  memoryImageUrl,
-  userId,
-  user,
-}: TMemory & {
-  user: any;
-}) {
-  const apiContext = api.useContext();
-
-  // const deleteMemoryMutation = api.memories.deleteMemory.useMutation({
-  //   onSuccess: async () => {
-  //     toast.success("Memory deleted");
-  //     await apiContext.memories.getAllMemories.invalidate();
-  //   },
-  //   onError: (error) => {
-  //     toast.error(error.message);
-  //   },
-  // });
-
-  return (
-    <div className="group relative aspect-square max-h-[26rem] w-full cursor-pointer overflow-hidden">
-      {/* <Button
-        type="button"
-        size="sm"
-        // eslint-disable-next-line @typescript-eslint/no-misused-promises
-        onClick={async () =>
-          deleteMemoryMutation.mutateAsync({
-            id,
-          })
-        }
-        isLoading={deleteMemoryMutation.isLoading}
-        disabled={deleteMemoryMutation.isLoading}
-        className="absolute right-2 top-2 z-50 text-red-500 opacity-0 transition duration-300 ease-in-out group-hover:opacity-100"
-      >
-        <Trash2 />
-      </Button> */}
-      <div className="pt-30 absolute inset-x-0 -bottom-2 z-40 flex cursor-pointer items-end bg-gradient-to-t from-black to-transparent text-white opacity-0 transition duration-300 ease-in-out group-hover:opacity-100">
-        <div>
-          <div className="translate-y-4 transform-gpu space-y-3 p-4 pb-10 text-xl transition duration-300 ease-in-out group-hover:translate-y-0 group-hover:opacity-100">
-            {/* <div className="font-bold">Jessie Watsica</div>
-
-            <div className="text-sm opacity-60 ">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Distinctio dolores error iure, perferendis sequi totam. Ad aliquam
-              aperiam atque deleniti dolor dolorem enim esse et in, inventore
-              itaque, pariatur reprehenderit.
-            </div> */}
-
-            <p className="text-xl font-bold opacity-90">
-              &quot;{description}&quot;
-            </p>
-            <span className="text-sm font-medium text-ashgray-700">
-              by {user?.name}
-            </span>
-          </div>
-        </div>
-      </div>
-      <BlurImage
-        className="aspect-square w-full object-left transition duration-300 ease-in-out group-hover:scale-110"
-        src={memoryImageUrl}
-        alt={description}
-        fill
-        objectFit="cover"
-      />
-    </div>
-  );
-}
 
 interface FeedPageProps {
   userSession: Session;

@@ -15,7 +15,7 @@ import { cn } from "@/utils/cn";
 import { Heart, Upload, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Seo from "@/components/Seo";
-import { Memory, MemoryLoaderUI } from "../feed";
+import Memory, { MemoryLoaderUI } from "@/components/memory";
 
 interface ProfilePageProps {
   userSession: Session;
@@ -64,10 +64,10 @@ const ProfilePage = ({ userSession }: ProfilePageProps) => {
                     )}
                     {!isLoadingUserProfileData && userProfileData && (
                       <>
-                        <h1 className="text-xl font-medium text-ashgray-100 lg:text-2xl">
+                        <h1 className="text-xl font-medium text-black dark:text-ashgray-100 lg:text-2xl">
                           {userProfileData?.name}
                         </h1>
-                        <span className="text-ashgray-600">
+                        <span className="text-ashgray-700 dark:text-ashgray-600">
                           @{userProfileData?.username}
                         </span>
                       </>
@@ -80,21 +80,23 @@ const ProfilePage = ({ userSession }: ProfilePageProps) => {
                     <Skeleton className="h-8 w-24 rounded-md" />
                   )}
                   {memoriesData && (
-                    <div className="w-fit rounded-md border-2 border-ashgray-900 px-3.5 py-1 font-medium text-ashgray-300">
+                    <div className="w-fit rounded-md border-2 border-ashgray-900 px-3.5 py-1 font-medium text-black dark:text-ashgray-300">
                       <p className="flex gap-x-1">
                         {memoriesData.length} Memories
                       </p>
                     </div>
                   )}
-                  <div className="inline-flex w-fit items-center gap-x-2 rounded px-2.5 font-medium text-white">
+                  {/* <div className="inline-flex w-fit items-center gap-x-2 rounded px-2.5 font-medium text-white">
                     <Heart
                       className={cn("text-brand h-6 w-6 cursor-pointer", {
-                        "fill-taupe text-battleship-gray/70": true,
+                        "fill-black text-black dark:fill-taupe dark:text-battleship-gray/70":
+                          true,
                       })}
-                      // onClick={onFavorite}
                     />
-                    <p className="flex gap-x-1 text-battleship-gray">5 Likes</p>
-                  </div>
+                    <p className="flex gap-x-1 text-black dark:text-battleship-gray">
+                      5 Likes
+                    </p>
+                  </div> */}
                 </div>
               </div>
             </div>
@@ -296,9 +298,9 @@ export function ProfileImage() {
         <label
           htmlFor="image"
           className={cn(
-            "dark:hover:bg-bray-800 flex h-56 w-56 cursor-pointer flex-col items-center justify-center rounded-full border-2 border-dashed border-ashgray-600 bg-gray-50 hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:border-gray-500 dark:hover:bg-gray-600",
+            "dark:hover:bg-bray-800 flex h-56 w-56 cursor-pointer flex-col items-center justify-center rounded-full border-2 border-dashed border-ashgray-600 bg-gray-50 hover:bg-gray-100 dark:border-gray-600 dark:bg-ashgray-700/50 dark:hover:border-gray-500",
             {
-              "absolute hidden group-hover:flex group-hover:bg-black/50":
+              "absolute hidden group-hover:flex group-hover:bg-ashgray-700/50 dark:group-hover:bg-black/50":
                 userData?.image && !isLoadingUserData,
               flex:
                 !userData?.image && !inputImagePreviewUrl && isLoadingUserData,

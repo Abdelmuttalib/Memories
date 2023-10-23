@@ -9,14 +9,16 @@ import Link from "next/link";
 import { HomeIcon, PlusIcon, UserIcon } from "@heroicons/react/20/solid";
 import { LogIn, LogOut, Plus, PlusCircle, User } from "lucide-react";
 import { useRouter } from "next/router";
-import { Menu, Transition } from "@headlessui/react";
-import { Fragment } from "react";
+import { Menu, Listbox, Transition } from "@headlessui/react";
+import { Fragment, useState } from "react";
 import type { ClassValue } from "clsx";
 import { cn } from "@/utils/cn";
+import { MoonIcon, SunIcon } from "lucide-react";
 
 import { Avatar, AvatarImage } from "../ui/avatar";
 import { api } from "@/utils/api";
 import { Skeleton } from "../ui/skeleton";
+import { ThemeToggle } from "../theme-toggle";
 
 const homeNavLinks = [
   {
@@ -41,19 +43,19 @@ export default function MainNav({ className }: MainNavProps) {
   return (
     <div
       className={cn(
-        "sticky bottom-6 left-0 right-0 z-40 mx-auto flex w-fit items-center justify-between gap-x-3 rounded-md bg-ashgray-200 p-2 shadow-xl",
+        "sticky bottom-6 left-0 right-0 z-40 mx-auto flex w-fit items-center justify-between gap-x-3 rounded-md border bg-ashgray-200 p-2 shadow-xl dark:border-black dark:bg-ashgray-900",
         className
       )}
     >
       <nav>
         <Tabs defaultValue={pathname} className="rounded-xl">
-          <TabsList className="h-auto rounded-xl bg-ashgray-300">
+          <TabsList className="h-auto rounded-xl bg-ashgray-300 dark:bg-ashgray-900">
             {homeNavLinks.map(({ label, href, icon }) => (
               <TabsTrigger
                 key={`${label}${href}`}
                 value={href}
                 asChild
-                className="rounded-[6px]"
+                className="dark:data-[state=active]:text-ashgray-4400 rounded-[6px] dark:bg-ashgray-900 dark:text-ashgray-200 dark:data-[state=active]:bg-ashgray-800/50 dark:data-[state=active]:text-white"
               >
                 <Link href={href}>
                   {/* {label} */}
@@ -66,6 +68,8 @@ export default function MainNav({ className }: MainNavProps) {
       </nav>
       <div className="flex items-center gap-x-3">
         <ImageUpload />
+
+        <ThemeToggle />
 
         {status === USER_SESSION_STATUS.AUTHENTICATED && <UserMenu />}
         {status === USER_SESSION_STATUS.UNAUTHENTICATED && (
@@ -85,7 +89,6 @@ export default function MainNav({ className }: MainNavProps) {
 }
 
 function UserMenu() {
-  const { data: session } = useSession();
   const { push } = useRouter();
 
   const { data: userProfileData, isLoading: isLoadingUserProfileData } =
@@ -101,7 +104,7 @@ function UserMenu() {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="absolute bottom-full mb-4 w-48 origin-top-right divide-y divide-ashgray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+        <Menu.Items className="absolute bottom-full mb-4 w-fit min-w-[8rem] origin-top-right divide-y divide-ashgray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:divide-ashgray-800 dark:bg-ashgray-900 sm:w-48">
           <div className="px-1 py-1 ">
             <Menu.Item>
               {({ active }) => (
@@ -110,7 +113,9 @@ function UserMenu() {
                   // eslint-disable-next-line @typescript-eslint/no-misused-promises
                   onClick={() => push("/profile")}
                   className={`${
-                    active ? "bg-ashgray-900 text-white" : "text-ashgray-900"
+                    active
+                      ? "bg-ashgray-900 text-white dark:bg-white dark:text-black"
+                      : "text-ashgray-900 dark:text-ashgray-100"
                   } group flex w-full items-center rounded-md px-2 py-2 text-sm font-medium`}
                 >
                   <User className="mr-2 h-5 w-5" aria-hidden="true" />
@@ -127,7 +132,9 @@ function UserMenu() {
                   // eslint-disable-next-line @typescript-eslint/no-misused-promises
                   onClick={() => signOut()}
                   className={`${
-                    active ? "bg-ashgray-900 text-white" : "text-ashgray-900"
+                    active
+                      ? "bg-ashgray-900 text-white dark:bg-white dark:text-black"
+                      : "text-ashgray-900 dark:text-ashgray-100"
                   } group flex w-full items-center rounded-md px-2 py-2 text-sm font-medium`}
                 >
                   <LogOut className="mr-2 h-5 w-5" aria-hidden="true" />
@@ -141,7 +148,7 @@ function UserMenu() {
 
       <div className="-mb-1">
         <Menu.Button>
-          <Avatar className="relative mx-1 ring-2 ring-black ring-offset-2">
+          <Avatar className="relative mx-1 ring-2 ring-black ring-offset-2 dark:ring-white dark:ring-offset-ashgray-900">
             {isLoadingUserProfileData && !userProfileData && (
               <Skeleton className="h-full w-full rounded-full" />
             )}

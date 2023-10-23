@@ -31,12 +31,12 @@ export default function Home() {
             className="h-auto w-auto opacity-20"
           />
         </div>
-        <div className="absolute flex flex-col gap-6 text-center text-slate-200">
+        <div className="absolute flex flex-col gap-2 text-center text-slate-200 sm:gap-6">
           <div className="space-y-6">
-            <h1 className="font-sans text-6xl font-extrabold uppercase tracking-tighter md:text-8xl">
+            <h1 className="font-sans text-5xl font-extrabold uppercase tracking-tighter sm:text-6xl md:text-8xl">
               Memories
             </h1>
-            <p className="max-w-sm text-base text-gray-400 md:max-w-3xl md:text-lg">
+            <p className="max-w-sm text-base text-gray-400 sm:max-w-lg md:max-w-3xl md:text-lg">
               Share Life&apos;s Treasured Moments with the World. Capture the
               essence of your most precious memories and share them with the
               world through Memories. Embrace the beauty of heartfelt stories,

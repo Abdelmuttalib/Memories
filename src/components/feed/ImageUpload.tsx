@@ -286,7 +286,7 @@ function ImageUploadForm({
               <div className="flex flex-col p-2">
                 <label
                   htmlFor="imageUpload"
-                  className="group flex h-96 w-full cursor-pointer items-center justify-center rounded border-2 border-dashed border-ashgray-300 p-8 font-semibold hover:bg-ashgray-100"
+                  className="group flex h-96 w-full cursor-pointer items-center justify-center rounded border-2 border-dashed border-ashgray-300 p-8 font-semibold hover:bg-ashgray-100 dark:border-ashgray-800 dark:hover:bg-ashgray-900"
                 >
                   <div className="flex flex-col items-center justify-center pb-6 pt-5">
                     <svg
@@ -305,7 +305,7 @@ function ImageUploadForm({
                       ></path>
                     </svg>
                     <p className="mb-2 text-sm ">
-                      <span className="font-semibold text-black underline decoration-2 underline-offset-2">
+                      <span className="font-semibold text-black underline decoration-2 underline-offset-2 dark:text-white">
                         Click to upload
                       </span>
                       {/* or
@@ -377,7 +377,17 @@ function ImageUploadForm({
         />
         {errors.location && <p>{errors.location.message}</p>}
 
-        <div className="mb-6 mt-2 flex flex-col gap-y-2 sm:mt-4 sm:flex-row sm:gap-x-2 sm:gap-y-0">
+        <div className="mb-6 mt-2 flex flex-col gap-y-2 sm:mt-4 sm:flex-row-reverse sm:gap-x-2 sm:gap-y-0">
+          <Button
+            type="submit"
+            className="sm:flex-1"
+            disabled={uploading}
+            isLoading={uploading}
+            // disabled={createMemoryMutation.isLoading}
+            // isLoading={createMemoryMutation.isLoading}
+          >
+            Share Memory
+          </Button>
           <Button
             type="button"
             variant="outline"
@@ -388,16 +398,6 @@ function ImageUploadForm({
             // isLoading={createMemoryMutation.isLoading}
           >
             Cancel
-          </Button>
-          <Button
-            type="submit"
-            className="sm:flex-1"
-            disabled={uploading}
-            isLoading={uploading}
-            // disabled={createMemoryMutation.isLoading}
-            // isLoading={createMemoryMutation.isLoading}
-          >
-            Share Memory
           </Button>
         </div>
       </div>
@@ -427,7 +427,7 @@ const ImageUploadDialog: FC<{
       <Transition appear show={open} as={Fragment}>
         <Dialog
           as="div"
-          className="relative z-10"
+          className="relative z-50"
           onClose={() => setOpen(false)}
         >
           <Transition.Child
@@ -439,7 +439,7 @@ const ImageUploadDialog: FC<{
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-black bg-opacity-60" />
+            <div className="fixed inset-0 bg-black bg-opacity-60 dark:bg-opacity-90" />
           </Transition.Child>
 
           {/* <DialogTrigger asChild>
@@ -460,7 +460,7 @@ const ImageUploadDialog: FC<{
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full max-w-2xl transform overflow-hidden rounded-xl bg-white px-0 py-0 text-left align-middle shadow-xl transition-all">
+                <Dialog.Panel className="w-full max-w-2xl transform overflow-hidden rounded-xl bg-white px-0 py-0 text-left align-middle shadow-xl transition-all dark:bg-ashgray-900">
                   {/* <Dialog.Title
                   as="h3"
                   className="text-lg font-medium leading-6 text-gray-900"
@@ -473,7 +473,9 @@ const ImageUploadDialog: FC<{
                     an email with all of the details of your order.
                   </p>
                 </div> */}
-                  {children}
+                  <div className="h-full w-full dark:bg-black/70">
+                    {children}
+                  </div>
                 </Dialog.Panel>
               </Transition.Child>
             </div>

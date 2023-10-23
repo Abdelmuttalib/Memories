@@ -37,7 +37,7 @@ export default function LoginLayout({ children }: LoginLayoutProps) {
     );
   }
   return (
-    <div className="container relative hidden h-[100svh] flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-5 lg:px-0">
+    <div className="container relative h-[100svh] flex-col items-center justify-center px-0 dark:bg-black lg:grid lg:max-w-none lg:grid-cols-5 lg:px-0">
       <div className="relative hidden h-full flex-col bg-black text-white lg:col-span-3 lg:block">
         <div className="relative h-full w-full">
           <Image
@@ -73,7 +73,7 @@ export default function LoginLayout({ children }: LoginLayoutProps) {
         </div>
       </div>
 
-      <div className="relative h-full lg:col-span-2 lg:p-8">
+      <div className="relative block h-full dark:bg-black lg:col-span-2 lg:p-8">
         {/* <Button
           variant="outline"
           size="sm"

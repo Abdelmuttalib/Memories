@@ -25,9 +25,10 @@ const buttonVariants = cva(
     // hover black // #2c343e
     variants: {
       variant: {
-        default: "bg-black text-white hover:bg-ashgray-900/90",
+        default:
+          "bg-black text-white hover:bg-ashgray-900/90 dark:bg-white dark:text-black dark:hover:bg-ashgray-100/90",
         outline:
-          "border-2 border-ashgray-800 text-ashgray-900 hover:bg-ashgray-200/50",
+          "border-2 border-ashgray-800 text-ashgray-900 hover:bg-ashgray-200/50 dark:border-2 dark:border-white dark:text-white dark:hover:bg-ashgray-900/90",
         secondary: "bg-ashgray-100 text-ashgray-900 hover:bg-ashgray-200",
         ghost: "hover:bg-ashgray-100 hover:text-ashgray-900",
         link: "underline-offset-4 hover:underline text-primary",
