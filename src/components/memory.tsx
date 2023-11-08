@@ -55,10 +55,6 @@ export default function Memory({
     },
   });
 
-  const { data: memoryLikesCount } = api.memories.countMemoryLikes.useQuery({
-    memoryId: id,
-  });
-
   async function onLikeMemory() {
     await likeMemoryMutation.mutateAsync({
       memoryId: id,

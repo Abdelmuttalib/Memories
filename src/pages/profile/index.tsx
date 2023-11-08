@@ -32,7 +32,7 @@ const ProfilePage = ({ userSession }: ProfilePageProps) => {
     <>
       <Seo
         title="Profile | Memories"
-        description="you can update your profile image and name"
+        description="you can update your profile image and check your memories"
       />
       <Layout>
         <main className="container w-full">

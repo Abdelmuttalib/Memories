@@ -18,7 +18,6 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {/* #0D0C0A */}
       <main className="relative flex h-full min-h-[100svh] items-center justify-center bg-black">
         <div className="relative h-[100svh] w-full bg-black">
           <Image

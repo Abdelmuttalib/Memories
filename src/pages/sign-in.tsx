@@ -14,6 +14,7 @@ import { getProviders, signIn } from "next-auth/react";
 import SignInForm from "@/components/auth/SignInForm";
 import { Button, ButtonLink } from "@/components/ui/button";
 import LoginLayout from "@/components/layout/LoginLayout";
+import Seo from "@/components/Seo";
 
 // type TProvider = {
 //   callbackUrl: string;
@@ -28,6 +29,10 @@ const SignInPage: NextPage<
 > = () => {
   return (
     <>
+      <Seo
+        title="Sign in | Memories"
+        description="sign in to your account with your credentials"
+      />
       <LoginLayout>
         <SignInForm />
       </LoginLayout>

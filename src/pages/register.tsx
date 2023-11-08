@@ -13,6 +13,7 @@ import { getProviders, signIn } from "next-auth/react";
 import CreateAccountForm from "@/components/auth/CreateAccountForm";
 import { Button } from "@/components/ui/button";
 import LoginLayout from "@/components/layout/LoginLayout";
+import Seo from "@/components/Seo";
 
 // type TProvider = {
 //   callbackUrl: string;
@@ -27,6 +28,10 @@ const SignInPage: NextPage<
 > = () => {
   return (
     <>
+      <Seo
+        title="Register | Memories"
+        description="create your account and start sharing your memories"
+      />
       <LoginLayout>
         <CreateAccountForm />
       </LoginLayout>

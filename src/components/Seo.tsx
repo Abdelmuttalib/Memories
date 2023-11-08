@@ -2,9 +2,9 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 
 const defaultMeta = {
-  title: "Momentum",
-  siteName: "Momentum",
-  description: "Momentum, The Open Source issue tracking tool",
+  title: "Memories",
+  siteName: "Memories",
+  description: "Memories, Share Life's Treasured Moments with the World.",
   url: "",
   type: "website",
   robots: "follow, index",
@@ -26,16 +26,6 @@ export default function Seo(props: SeoProps) {
   meta["title"] = props.templateTitle
     ? `${props.templateTitle} | ${meta.siteName}`
     : meta.title;
-
-  // Use siteName if there is templateTitle
-  // but show full title if there is none
-  // !STARTERCONF Follow config for opengraph, by deploying one on https://github.com/theodorusclarence/og
-  // ? Uncomment code below if you want to use default open graph
-  // meta['image'] = openGraph({
-  //   description: meta.description,
-  //   siteName: props.templateTitle ? meta.siteName : meta.title,
-  //   templateTitle: props.templateTitle,
-  // });
 
   return (
     <Head>
