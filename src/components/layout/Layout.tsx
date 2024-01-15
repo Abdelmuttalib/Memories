@@ -14,7 +14,7 @@ import { type ReactNode } from "react";
 
 function Header() {
   return (
-    <header className="sticky top-3 z-50 mx-auto h-14 w-fit rounded-md bg-black">
+    <header className="sticky top-1.5 z-50 mx-auto h-14 w-fit rounded-md bg-black md:top-3">
       <div className="container flex h-14 w-fit items-center justify-center rounded-md">
         <Link href="/" className="text-ashgray-100 shadow-xl">
           <span className="text-2xl font-bold tracking-tighter sm:text-3xl">

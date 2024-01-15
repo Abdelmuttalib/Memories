@@ -38,12 +38,12 @@ interface MainNavProps {
 }
 
 export default function MainNav({ className }: MainNavProps) {
-  const { pathname, push } = useRouter();
+  const { pathname } = useRouter();
   const { status } = useSession();
   return (
     <div
       className={cn(
-        "sticky bottom-6 left-0 right-0 z-40 mx-auto flex w-fit items-center justify-between gap-x-3 rounded-md border bg-ashgray-200 p-2 shadow-xl dark:border-black dark:bg-ashgray-900",
+        "sticky bottom-6 left-0 right-0 z-40 mx-auto flex w-full max-w-sm items-center justify-between gap-x-3 rounded-2xl border-2 border-black bg-ashgray-200 p-3 px-5 shadow-xl dark:border-ashgray-200 dark:bg-ashgray-900",
         className
       )}
     >
@@ -66,24 +66,24 @@ export default function MainNav({ className }: MainNavProps) {
           </TabsList>
         </Tabs>
       </nav>
-      <div className="flex items-center gap-x-3">
-        <ImageUpload />
+      {/* <div className="flex items-center gap-x-3"> */}
+      <ImageUpload />
 
-        <ThemeToggle />
+      <ThemeToggle />
 
-        {status === USER_SESSION_STATUS.AUTHENTICATED && <UserMenu />}
-        {status === USER_SESSION_STATUS.UNAUTHENTICATED && (
-          <ButtonLink
-            href="/sign-in"
-            variant="outline"
-            size="sm"
-            className="flex items-center gap-x-1.5"
-          >
-            Sign In
-            <LogIn className="w-5" />
-          </ButtonLink>
-        )}
-      </div>
+      {status === USER_SESSION_STATUS.AUTHENTICATED && <UserMenu />}
+      {status === USER_SESSION_STATUS.UNAUTHENTICATED && (
+        <ButtonLink
+          href="/sign-in"
+          variant="outline"
+          size="sm"
+          className="flex items-center gap-x-1.5"
+        >
+          Sign In
+          <LogIn className="w-5" />
+        </ButtonLink>
+      )}
+      {/* </div> */}
     </div>
   );
 }

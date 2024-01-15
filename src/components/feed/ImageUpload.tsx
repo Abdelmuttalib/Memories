@@ -420,9 +420,9 @@ const ImageUploadDialog: FC<{
         size="icon"
         onClick={() => setOpen(true)}
         disabled={status === USER_SESSION_STATUS.UNAUTHENTICATED}
-        // className="disabled:cursor-none"
+        className="px-4 font-medium"
       >
-        <Plus className="w-8" />
+        <Plus className="mr-1 w-5" /> Share Memory
       </Button>
       <Transition appear show={open} as={Fragment}>
         <Dialog
