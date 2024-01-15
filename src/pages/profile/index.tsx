@@ -12,7 +12,7 @@ import { decode } from "base64-arraybuffer";
 import { Skeleton } from "@/components/ui/skeleton";
 import imageCompression from "browser-image-compression";
 import { cn } from "@/utils/cn";
-import { Heart, Upload, X } from "lucide-react";
+import { Upload, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Seo from "@/components/Seo";
 import Memory, { MemoryLoaderUI } from "@/components/memory";
