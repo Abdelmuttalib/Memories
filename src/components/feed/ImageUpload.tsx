@@ -10,9 +10,7 @@ import React, {
   type FC,
   type ReactNode,
   type SetStateAction,
-  useRef,
   useState,
-  useEffect,
   Fragment,
 } from "react";
 import { useForm, Controller } from "react-hook-form";
@@ -20,16 +18,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { supabase } from "@/server/supabase";
 import { MapPinIcon, XMarkIcon } from "@heroicons/react/20/solid";
-import { prisma } from "@/server/db";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { api } from "@/utils/api";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import imageCompression from "browser-image-compression";
-import BlurImage from "../ui/blur-image";
 import { nanoid } from "nanoid";
 import { decode } from "base64-arraybuffer";
 import { toast } from "sonner";
@@ -104,7 +99,6 @@ function ImageUploadForm({
     },
 
     onError: (err) => {
-      // console.log("error creating memory");
       toast.error("error creating memory");
       // toast.error(err.message);
     },
@@ -321,7 +315,6 @@ function ImageUploadForm({
                     id="imageUpload"
                     type="file"
                     onChange={(e) => {
-                      // console.log("e: ", e);
                       if (e?.target?.files?.length && e.target.files[0]) {
                         const imagePreviewUrl = URL.createObjectURL(
                           e.target.files[0]
@@ -410,12 +403,9 @@ const ImageUploadDialog: FC<{
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
 }> = ({ children, open, setOpen }) => {
-  const { data: session, status } = useSession();
+  const { status } = useSession();
   return (
     <>
-      {/* <Button type="button" onClick={() => setOpen(true)}>
-        Share Memory
-      </Button> */}
       <Button
         size="icon"
         onClick={() => setOpen(true)}
@@ -442,13 +432,6 @@ const ImageUploadDialog: FC<{
             <div className="fixed inset-0 bg-black bg-opacity-60 dark:bg-opacity-90" />
           </Transition.Child>
 
-          {/* <DialogTrigger asChild>
-        <Button type="button">Share Memory</Button>
-      </DialogTrigger>
-      <DialogContent className="border-none bg-white p-0 pb-4 sm:max-w-xl">
-        {children}
-      </DialogContent> */}
-
           <div className="fixed inset-0 overflow-y-auto">
             <div className="flex min-h-full items-center justify-center p-4 text-center">
               <Transition.Child
@@ -461,18 +444,6 @@ const ImageUploadDialog: FC<{
                 leaveTo="opacity-0 scale-95"
               >
                 <Dialog.Panel className="w-full max-w-2xl transform overflow-hidden rounded-xl bg-white px-0 py-0 text-left align-middle shadow-xl transition-all dark:bg-ashgray-900">
-                  {/* <Dialog.Title
-                  as="h3"
-                  className="text-lg font-medium leading-6 text-gray-900"
-                >
-                  Payment successful
-                </Dialog.Title> */}
-                  {/* <div className="mt-2">
-                  <p className="text-sm text-gray-500">
-                    Your payment has been successfully submitted. We’ve sent you
-                    an email with all of the details of your order.
-                  </p>
-                </div> */}
                   <div className="h-full w-full dark:bg-black/70">
                     {children}
                   </div>

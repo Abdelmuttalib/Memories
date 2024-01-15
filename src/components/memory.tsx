@@ -170,8 +170,8 @@ export default function Memory({
 
 export function MemoryLoaderUI() {
   return (
-    <div className="group relative aspect-square max-h-[26rem] w-full cursor-pointer overflow-hidden">
-      <Skeleton className="aspect-square w-full rounded-none object-left group-hover:scale-110" />
+    <div className="relative aspect-square max-h-[26rem] w-full cursor-pointer overflow-hidden">
+      <Skeleton className="aspect-square w-full rounded-none object-left" />
     </div>
   );
 }

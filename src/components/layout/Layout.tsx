@@ -1,14 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-misused-promises */
 import Link from "next/link";
-import { useRouter } from "next/router";
-import { cn } from "@/utils/cn";
-import { ButtonLink } from "../ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
-import { HomeIcon, PlusIcon, UserIcon } from "@heroicons/react/20/solid";
-import { LogIn, LogOut, Plus, PlusCircle, User } from "lucide-react";
-import { Avatar, AvatarImage } from "../ui/avatar";
-import ImageUpload from "../feed/ImageUpload";
 import MainNav from "./MainNav";
 import { type ReactNode } from "react";
 

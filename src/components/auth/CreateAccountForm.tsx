@@ -56,7 +56,6 @@ export default function CreateAccountForm() {
   //     toast.error(err.message);
   //   },
   // });
-  // console.log(createUserMutation);
 
   const registerUserMutation = api.user.registerUser.useMutation({
     onSuccess: async () => {
@@ -86,7 +85,7 @@ export default function CreateAccountForm() {
       <h2 className="text-2xl font-bold lg:text-3xl">Create an Account</h2>
 
       <form
-        className="mt-6 flex flex-col gap-4"
+        className="mt-3 flex flex-col gap-2 md:mt-6 md:gap-4"
         onSubmit={handleSubmit(onSubmit)}
       >
         {/* Email Input */}

@@ -1,19 +1,17 @@
 import { USER_SESSION_STATUS } from "@/utils/user-session-status";
 import ImageUpload from "../feed/ImageUpload";
 import { ButtonLink } from "../ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
+import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
 
-import type { FC, ReactNode } from "react";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
-import { HomeIcon, PlusIcon, UserIcon } from "@heroicons/react/20/solid";
-import { LogIn, LogOut, Plus, PlusCircle, User } from "lucide-react";
+import { HomeIcon } from "@heroicons/react/20/solid";
+import { LogIn, LogOut, User } from "lucide-react";
 import { useRouter } from "next/router";
-import { Menu, Listbox, Transition } from "@headlessui/react";
-import { Fragment, useState } from "react";
+import { Menu, Transition } from "@headlessui/react";
+import { Fragment } from "react";
 import type { ClassValue } from "clsx";
 import { cn } from "@/utils/cn";
-import { MoonIcon, SunIcon } from "lucide-react";
 
 import { Avatar, AvatarImage } from "../ui/avatar";
 import { api } from "@/utils/api";
@@ -43,7 +41,11 @@ export default function MainNav({ className }: MainNavProps) {
   return (
     <div
       className={cn(
-        "sticky bottom-6 left-0 right-0 z-40 mx-auto flex w-full max-w-sm items-center justify-between gap-x-3 rounded-2xl border-2 border-black bg-ashgray-200 p-3 px-5 shadow-xl dark:border-ashgray-200 dark:bg-ashgray-900",
+        "sticky bottom-6 left-0 right-0 z-40 mx-auto flex w-full items-center justify-between gap-x-3 rounded-2xl border-2 border-black bg-ashgray-200 p-3 px-5 shadow-xl dark:border-ashgray-200 dark:bg-ashgray-900",
+        {
+          "max-w-sm": status === USER_SESSION_STATUS.AUTHENTICATED,
+          "max-w-md": status === USER_SESSION_STATUS.UNAUTHENTICATED,
+        },
         className
       )}
     >

@@ -19,6 +19,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="relative flex h-full min-h-[100svh] items-center justify-center bg-black">
+        <div className="absolute inset-0 z-10 h-full w-full bg-gradient-to-t from-black to-transparent"></div>
         <div className="relative h-[100svh] w-full bg-black">
           <Image
             src="https://images.unsplash.com/photo-1627892414579-ec3dc44bc31f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80"
@@ -30,7 +31,7 @@ export default function Home() {
             className="h-auto w-auto opacity-20"
           />
         </div>
-        <div className="absolute flex flex-col gap-2 text-center text-slate-200 sm:gap-6">
+        <div className="absolute z-20 flex flex-col gap-2 text-center text-slate-200 sm:gap-6">
           <div className="space-y-6">
             <h1 className="font-sans text-5xl font-extrabold uppercase tracking-tighter sm:text-6xl md:text-8xl">
               Memories
@@ -73,7 +74,6 @@ export default function Home() {
               objectFit="cover"
               quality={100}
               className="opacity-50"
-              onLoadingComplete={(image) => console.log(image)}
             />
           </div>
           <div className="absolute inset-0 bg-black opacity-60" />

@@ -3,14 +3,13 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useSession, signIn } from "next-auth/react";
-import { type Dispatch, type FC, type SetStateAction, useState } from "react";
+import { useState } from "react";
 import { cn } from "@/utils/cn";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useRouter } from "next/router";
 import { toast } from "sonner";
-import Link from "next/link";
 
 const signInValidationSchema = z.object({
   email: z
@@ -24,7 +23,6 @@ type TSignInFormFields = z.infer<typeof signInValidationSchema>;
 
 export default function SignInForm() {
   const { push } = useRouter();
-  const { data: session, status } = useSession();
 
   const [loading, setLoading] = useState(false);
 
@@ -56,7 +54,7 @@ export default function SignInForm() {
           toast.error("Sign in failed");
         }
       })
-      .catch((error) => {
+      .catch(() => {
         toast.error("Sign in failed");
       })
       .finally(() => setLoading(false));
@@ -71,7 +69,7 @@ export default function SignInForm() {
       </h2>
 
       <form
-        className="mt-6 flex flex-col gap-4"
+        className="mt-3 flex flex-col gap-2 md:mt-6 md:gap-4"
         onSubmit={handleSubmit(onSignIn)}
       >
         <div>

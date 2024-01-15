@@ -93,7 +93,7 @@ const FeedPage = ({ userSession }: FeedPageProps) => {
             {/* loading memories */}
             {!memories &&
               isLoadingMemories &&
-              [1, 2, 3, 4, 5].map((_, index) => <MemoryLoaderUI key={index} />)}
+              [1, 2, 3, 4, 5].map((_) => <MemoryLoaderUI key={_} />)}
 
             {/* no memories */}
           </div>

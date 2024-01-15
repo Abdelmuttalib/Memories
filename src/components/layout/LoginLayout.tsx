@@ -1,7 +1,5 @@
 import React from "react";
-import BlurImage from "../ui/blur-image";
-import { Button, ButtonLink } from "../ui/button";
-import { cn } from "@/utils/cn";
+import { ButtonLink } from "../ui/button";
 import { useRouter } from "next/router";
 import Image from "next/image";
 
@@ -47,17 +45,7 @@ export default function LoginLayout({ children }: LoginLayoutProps) {
             objectFit="cover"
             quality={100}
             className="bg-black opacity-50"
-            // onLoadingComplete={(image) => console.log("oo: ", image)}
           />
-          {/* <BlurImage
-            src="https://images.unsplash.com/photo-1479556234618-efd55bac0a26?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1161&q=80"
-            alt="two women taking selfie"
-            layout="fill"
-            objectFit="cover"
-            quality={100}
-            className="bg-red-300 opacity-50"
-            // onLoadingComplete={(image) => console.log("oo: ", image)}
-          /> */}
         </div>
         <div className="absolute inset-0 bg-black opacity-50" />
         <div className="absolute top-8 z-20 flex items-center px-7 py-2 text-lg font-bold text-zinc-300">
@@ -74,17 +62,8 @@ export default function LoginLayout({ children }: LoginLayoutProps) {
       </div>
 
       <div className="relative block h-full dark:bg-black lg:col-span-2 lg:p-8">
-        {/* <Button
-          variant="outline"
-          size="sm"
-          className={cn("absolute right-4 top-4 md:right-8 md:top-8")}
-        >
-          Login
-        </Button> */}
-        {/* <ButtonLink href="/api/auth/signin">Create Account</ButtonLink> */}
         {renderRedirectAuthLink()}
         <div className="mx-auto flex h-full w-full max-w-lg flex-col items-center justify-center gap-4 rounded-r-lg px-6 py-10 sm:px-20 sm:py-20">
-          {/* <SignInForm /> */}
           {children}
         </div>
       </div>
