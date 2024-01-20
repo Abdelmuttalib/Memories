@@ -35,11 +35,7 @@ export default function NavIsland({ className }: NavIslandProps) {
   return (
     <div
       className={cn(
-        "sticky bottom-6 left-0 right-0 z-40 mx-auto flex w-full items-center justify-between gap-x-3 rounded-2xl border-2 border-black bg-ashgray-200 p-3 px-4 shadow-xl dark:border-ashgray-200 dark:bg-black/[0.7] dark:backdrop-blur-lg",
-        {
-          "max-w-fit": status === USER_SESSION_STATUS.AUTHENTICATED,
-          "max-w-xs": status === USER_SESSION_STATUS.UNAUTHENTICATED,
-        },
+        "sticky bottom-6 left-0 right-0 z-40 mx-auto flex w-full max-w-[95%] items-center justify-between gap-x-3 rounded-2xl border-2 border-black bg-ashgray-200 p-3 px-4 shadow-xl dark:border-ashgray-200 dark:bg-black/[0.7] dark:backdrop-blur-lg sm:max-w-[27rem]",
         className
       )}
     >
