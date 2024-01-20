@@ -1,6 +1,6 @@
 import Link from "next/link";
-import MainNav from "./MainNav";
 import { type ReactNode } from "react";
+import NavIsland from "./nav-island";
 
 function Header() {
   return (
@@ -15,6 +15,7 @@ function Header() {
     </header>
   );
 }
+
 interface LayoutPros {
   children: ReactNode;
 }
@@ -24,15 +25,11 @@ interface LayoutPros {
 export default function Layout({ children }: LayoutPros) {
   return (
     <div className="relative flex min-h-screen flex-col bg-ashgray-100 dark:bg-[#0b0b0b]">
-      {/* header */}
       <Header />
-      {/* main */}
       <main className="relative h-[100svh] w-full flex-1">{children}</main>
-      {/* footer */}
-      <footer></footer>
 
-      {/*  */}
-      <MainNav />
+      {/* dynamic island nav */}
+      <NavIsland />
     </div>
   );
 }

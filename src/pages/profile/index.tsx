@@ -124,8 +124,8 @@ const ProfilePage = ({ userSession }: ProfilePageProps) => {
 
               {/* no memories */}
               {memoriesData && memoriesData.length === 0 && (
-                <div className="container mx-auto w-full bg-red-300">
-                  <p className="text-lg font-semibold text-gray-400">
+                <div className="container mx-auto w-fit">
+                  <p className="text-lg font-semibold text-ashgray-700">
                     No memories yet. Create one!
                   </p>
                 </div>
@@ -289,7 +289,10 @@ export function ProfileImage() {
         )}
         {!inputImagePreviewUrl && userData?.image && (
           <Image
-            src={userData?.image}
+            src={
+              userData?.image ||
+              "https://img.freepik.com/premium-vector/account-icon-user-icon-vector-graphics_292645-552.jpg"
+            }
             alt="profile image"
             layout="fill"
             className="rounded-full object-cover"
@@ -315,7 +318,7 @@ export function ProfileImage() {
             id="image"
             type="file"
             className="hidden"
-            accept="image/png, image/jpg, image/jpeg"
+            accept="image/png, image/jpg, image/jpeg, image/webp"
             // {...register("image", { required: true })}
             onChange={(e) => {
               const imageFileValue = e.target.files;
@@ -339,9 +342,8 @@ export function ProfileImage() {
         {inputImagePreviewUrl && (
           <Button
             type="button"
-            variant="destructive-outline"
+            variant="outline-destructive"
             size="icon"
-            className="w-fit"
             onClick={() => {
               setImageFile(null);
               setInputImagePreviewUrl(null);
@@ -397,13 +399,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
       },
     };
   }
-
-  // return {
-  //   redirect: {
-  //     destination: "/",
-  //     permanent: false,
-  //   },
-  // };
 
   return {
     props: {

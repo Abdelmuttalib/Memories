@@ -31,12 +31,12 @@ export default function Home() {
             className="h-auto w-auto opacity-20"
           />
         </div>
-        <div className="absolute z-20 flex flex-col gap-2 text-center text-slate-200 sm:gap-6">
+        <div className="absolute z-20 flex flex-col gap-2 px-4 text-center text-slate-200 sm:gap-6">
           <div className="space-y-6">
-            <h1 className="font-sans text-5xl font-extrabold uppercase tracking-tighter sm:text-6xl md:text-8xl">
+            <h1 className="font-sans text-5xl font-extrabold uppercase tracking-tighter text-ashgray-100 sm:text-6xl md:text-8xl">
               Memories
             </h1>
-            <p className="max-w-sm text-base text-gray-400 sm:max-w-lg md:max-w-3xl md:text-lg">
+            <p className="max-w-sm text-base text-ashgray-500 sm:max-w-lg md:max-w-3xl md:text-lg">
               Share Life&apos;s Treasured Moments with the World. Capture the
               essence of your most precious memories and share them with the
               world through Memories. Embrace the beauty of heartfelt stories,
@@ -49,7 +49,7 @@ export default function Home() {
           </p> */}
           <Button
             variant="secondary"
-            className="mx-auto mt-4 w-fit font-medium"
+            className="mx-auto mt-5 w-fit font-medium"
             // eslint-disable-next-line @typescript-eslint/no-misused-promises
             onClick={() => push("/feed")}
           >

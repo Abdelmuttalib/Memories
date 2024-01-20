@@ -250,7 +250,7 @@ function ImageUploadForm({
           <div className="rounded-t-lg">
             {inputImagePreviewUrl ? (
               <div className="relative flex flex-col gap-2.5">
-                <div className="relative h-96">
+                <div className="relative h-60 sm:h-96">
                   <Image
                     src={inputImagePreviewUrl}
                     alt=""
@@ -269,18 +269,18 @@ function ImageUploadForm({
                   // className="flex items-center justify-center rounded-md border border-gray-300 bg-transparent px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50"
                   variant="secondary"
                   disabled={uploading}
-                  className="group absolute right-2 top-2 pl-3 font-medium"
+                  className="group absolute right-2 top-2 pl-3 text-sm font-medium sm:text-base"
                   size="sm"
                 >
-                  <XMarkIcon className="w-5 sm:w-6" />
+                  <XMarkIcon className="mr-1 w-5 sm:w-6" />
                   Remove Image
                 </Button>
               </div>
             ) : (
-              <div className="flex flex-col p-2">
+              <div className="flex flex-col p-2 pb-0">
                 <label
                   htmlFor="imageUpload"
-                  className="group flex h-96 w-full cursor-pointer items-center justify-center rounded border-2 border-dashed border-ashgray-300 p-8 font-semibold hover:bg-ashgray-100 dark:border-ashgray-800 dark:hover:bg-ashgray-900"
+                  className="group flex h-60 w-full cursor-pointer items-center justify-center rounded border-2 border-dashed border-ashgray-300 p-8 font-semibold hover:bg-ashgray-100 dark:border-ashgray-800 dark:hover:bg-ashgray-900 sm:h-96"
                 >
                   <div className="flex flex-col items-center justify-center pb-6 pt-5">
                     <svg
@@ -306,7 +306,7 @@ function ImageUploadForm({
                       drag and drop */}
                     </p>
                     <p className="text-xs text-ashgray-600">
-                      PNG, JPG or JPEG
+                      PNG, JPG, JPEG or WEBP.
                       {/* (MAX. 800x400px) */}
                     </p>
                   </div>
@@ -346,7 +346,7 @@ function ImageUploadForm({
             <Textarea
               {...field}
               placeholder="describe your memory"
-              className="h-32 resize-none border-none text-xl font-medium ring-0  focus:ring-0 focus:ring-offset-0 focus-visible:ring-0 focus-visible:ring-offset-0 md:text-2xl"
+              className="h-32 resize-none border-none text-base font-medium ring-0 focus:ring-0  focus:ring-offset-0 focus-visible:ring-0 focus-visible:ring-offset-0 sm:text-xl md:text-2xl"
             />
           )}
         />
@@ -361,7 +361,7 @@ function ImageUploadForm({
               <Input
                 {...field}
                 placeholder="where this memory was captured (location)"
-                className="pr-10 text-lg font-medium ring-0 focus:ring-0 focus:ring-offset-0 focus-visible:ring-0 focus-visible:ring-offset-0"
+                className="pr-10 font-medium ring-0 focus:ring-0 focus:ring-offset-0 focus-visible:ring-0 focus-visible:ring-offset-0 sm:text-lg"
                 inputMode="text"
                 type="text"
               />
@@ -407,12 +407,14 @@ const ImageUploadDialog: FC<{
   return (
     <>
       <Button
-        size="icon"
+        type="button"
         onClick={() => setOpen(true)}
         disabled={status === USER_SESSION_STATUS.UNAUTHENTICATED}
-        className="px-4 font-medium"
+        className="inline-flex w-full items-center gap-x-1.5 font-medium"
       >
-        <Plus className="mr-1 w-5" /> Share Memory
+        <Plus className="mr-1 w-5" />
+        <span className="block sm:hidden">Share</span>
+        <span className="hidden sm:block">Share Memory</span>
       </Button>
       <Transition appear show={open} as={Fragment}>
         <Dialog
@@ -461,7 +463,7 @@ const ImageUpload = () => {
   const [open, setOpen] = useState(false);
   return (
     <ImageUploadDialog open={open} setOpen={setOpen}>
-      <div className="">
+      <div>
         <ImageUploadForm setOpen={setOpen} />
       </div>
     </ImageUploadDialog>

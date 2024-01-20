@@ -32,15 +32,15 @@ const buttonVariants = cva(
         secondary: "bg-ashgray-100 text-ashgray-900 hover:bg-ashgray-200",
         ghost: "hover:bg-ashgray-100 hover:text-ashgray-900",
         link: "underline-offset-4 hover:underline text-primary",
-        destructive: "bg-destructive text-white hover:bg-destructive/90",
-        "destructive-outline":
-          "bg-transparent text-destructive hover:bg-destructive/10 border-2 border-destructive",
+        destructive: "bg-red-500 text-white hover:bg-red-500/90",
+        "outline-destructive":
+          "bg-transparent text-red-500 hover:bg-red-500/10 border-2 border-red-500",
       },
       size: {
         default: "h-11 py-2 px-6",
         sm: "h-10 px-4 rounded-md",
         lg: "h-12 px-9 rounded-md",
-        icon: "h-11 px-2 rounded-lg",
+        icon: "h-11 w-11 rounded-lg",
       },
     },
     defaultVariants: {

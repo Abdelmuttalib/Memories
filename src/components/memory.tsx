@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import { Heart } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { cn } from "@/utils/cn";
+import { USER_SESSION_STATUS } from "@/utils/user-session-status";
 
 export default function Memory({
   id,
@@ -18,7 +19,7 @@ export default function Memory({
   user: any;
   likes: MemoryLike[];
 }) {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const apiContext = api.useContext();
 
   const userLikedMemory = session
@@ -104,9 +105,9 @@ export default function Memory({
       >
         <Trash2 />
       </Button> */}
-      <div className="absolute inset-x-0 -bottom-2 z-40 flex cursor-pointer items-end bg-gradient-to-t from-black to-transparent text-white opacity-0 transition duration-300 ease-in-out group-hover:opacity-100">
+      <div className="absolute inset-x-0 -bottom-2 z-40 flex cursor-pointer items-end bg-gradient-to-t from-black to-transparent text-white opacity-100 transition duration-300 ease-in-out group-hover:opacity-100 lg:opacity-0">
         <div className="w-full">
-          <div className="flex w-full translate-y-4 transform-gpu items-start justify-between space-y-3 p-4 pb-10 text-xl transition duration-300 ease-in-out group-hover:translate-y-0 group-hover:opacity-100">
+          <div className="flex w-full translate-y-4 transform-gpu items-start justify-between space-y-3 p-4 pb-10 text-xl opacity-100 transition duration-300 ease-in-out lg:opacity-0 lg:group-hover:translate-y-0 lg:group-hover:opacity-100">
             {/* <div className="font-bold">Jessie Watsica</div>
 
             <div className="text-sm opacity-60 ">
@@ -131,9 +132,11 @@ export default function Memory({
                 // eslint-disable-next-line @typescript-eslint/no-misused-promises
                 onClick={handleLikeClick}
                 disabled={
-                  likeMemoryMutation.isLoading || unlikeMemoryMutation.isLoading
+                  likeMemoryMutation.isLoading ||
+                  unlikeMemoryMutation.isLoading ||
+                  status === USER_SESSION_STATUS.UNAUTHENTICATED
                 }
-                className="disabled:opacity-30"
+                className="disabled:opacity-40"
               >
                 <Heart
                   className={cn("w-6 text-white", {
@@ -144,9 +147,10 @@ export default function Memory({
               {likes && (
                 <span
                   className={cn({
-                    "opacity-40":
+                    "opacity-50":
                       likeMemoryMutation.isLoading ||
-                      unlikeMemoryMutation.isLoading,
+                      unlikeMemoryMutation.isLoading ||
+                      status === USER_SESSION_STATUS.UNAUTHENTICATED,
                   })}
                 >
                   {likes?.length}

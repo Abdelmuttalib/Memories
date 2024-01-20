@@ -6,14 +6,11 @@ import Seo from "@/components/Seo";
 import ImageUpload from "@/components/feed/ImageUpload";
 import Layout from "@/components/layout/Layout";
 import Memory, { MemoryLoaderUI } from "@/components/memory";
-import BlurImage from "@/components/ui/blur-image";
 import { ButtonLink } from "@/components/ui/button";
 // import { Button } from "@/components/ui/button";
-import { Skeleton } from "@/components/ui/skeleton";
 import { getServerAuthSession } from "@/server/auth";
 import { api } from "@/utils/api";
 import { cn } from "@/utils/cn";
-import type { Memory as TMemory, User } from "@prisma/client";
 import { LogIn } from "lucide-react";
 // import { Trash2 } from "lucide-react";
 import type { GetServerSideProps } from "next";
@@ -107,22 +104,6 @@ export default FeedPage;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const userSession = await getServerAuthSession(context);
-
-  // if (!userSession) {
-  //   return {
-  //     redirect: {
-  //       destination: "/auth/sign-in",
-  //       permanent: false,
-  //     },
-  //   };
-  // }
-
-  // return {
-  //   redirect: {
-  //     destination: "/",
-  //     permanent: false,
-  //   },
-  // };
 
   return {
     props: {
