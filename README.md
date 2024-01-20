@@ -1,12 +1,11 @@
 # Memories
 Share Life's Treasured Moments with the World.
 
-![Screenshot 2023-11-08 at 17-52-00 Feed Memories](https://github.com/Abdelmuttalib/Memories/assets/54845047/1cd35c76-517e-4fdf-9f0c-230782cf678f)
-
-![Screenshot 2023-11-08 at 17-56-25 Profile Memories](https://github.com/Abdelmuttalib/Memories/assets/54845047/76e99951-417b-40e7-b65b-b607441b61f7)
-![Screenshot 2023-11-08 at 17-56-32 Profile Memories](https://github.com/Abdelmuttalib/Memories/assets/54845047/1ae64d7e-85c8-4ef5-ba8f-426f3112702e)
-
-![Screenshot 2023-10-24 at 00-20-01 Memories](https://github.com/Abdelmuttalib/Memories/assets/54845047/cfbb9f91-9d9b-4c77-84e9-a7acc7874855)
-
-![Screenshot 2023-10-24 at 00-21-07 https __memories-ashen vercel app](https://github.com/Abdelmuttalib/Memories/assets/54845047/701af0dc-9ca2-46a9-bfdb-c28df01fa9e8)
-![Screenshot 2023-11-08 at 17-53-35 Register Memories](https://github.com/Abdelmuttalib/Memories/assets/54845047/96fdee59-1c89-4726-b9d2-c53081169ce1)
+![Screenshot 2024-01-21 at 04-34-57 Memories](https://github.com/Abdelmuttalib/Memories/assets/54845047/3f83afdf-f4be-495a-9074-9495da26b655)
+![Screenshot 2024-01-21 at 04-35-47 Feed Memories](https://github.com/Abdelmuttalib/Memories/assets/54845047/ddce8a4a-cefd-46c9-b13e-52bb53906d06)
+![Screenshot 2024-01-21 at 04-36-12 Sign in Memories](https://github.com/Abdelmuttalib/Memories/assets/54845047/78a2b841-25a1-450b-a9e6-3b2262cfb885)
+![Screenshot 2024-01-21 at 04-37-23 Register Memories](https://github.com/Abdelmuttalib/Memories/assets/54845047/a4ec5827-c0fa-4f5d-8e71-a11d013169f8)
+![Screenshot 2024-01-21 at 04-37-56 Profile Memories](https://github.com/Abdelmuttalib/Memories/assets/54845047/99664099-7af2-40cb-b612-1630749358a4)
+![Screenshot 2024-01-21 at 04-38-23 Feed Memories](https://github.com/Abdelmuttalib/Memories/assets/54845047/0a6fda31-48a1-4dc3-a63c-53aa8d7f2225)
+![Screenshot 2024-01-21 at 04-38-40 Feed Memories](https://github.com/Abdelmuttalib/Memories/assets/54845047/e8548a0b-82e8-4ef6-948c-889ef2a9aabe)
+![Screenshot 2024-01-21 at 04-38-56 Memories](https://github.com/Abdelmuttalib/Memories/assets/54845047/649269f6-09e1-4966-86ec-9599f1a26118)
